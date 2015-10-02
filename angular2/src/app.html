@@ -1,0 +1,6 @@
+<h1 id="output">Angular 2 WebSockets - {{username}}</h1>
+
+<p *ng-for="#message of chat"><b>{{message.username}}</b> {{message.message}}</p>
+
+<input #message />
+<button (click)="sendMessage(message.value)">Send</button>

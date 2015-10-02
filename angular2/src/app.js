@@ -15,7 +15,12 @@ var AppComponent = (function () {
     function AppComponent(chatService) {
         this.chat = chatService.chat;
         this.chatService = chatService;
+        this.setUsername("User_" + new Date().getTime());
     }
+    AppComponent.prototype.setUsername = function (username) {
+        this.username = username;
+        this.chatService.setUsername(this.username);
+    };
     AppComponent.prototype.sendMessage = function (message) {
         this.chatService.sendMessage(message);
     };
