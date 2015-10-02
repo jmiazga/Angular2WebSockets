@@ -1,7 +1,9 @@
+declare var io;
+
 export class ChatService {
   username: string;
   chat: Array<ChatMessage>;
-  private socket: Object;
+  private socket: SocketIO.Socket;
 
   constructor() {
     this.username = "";
@@ -22,17 +24,22 @@ export class ChatService {
 
   sendMessage(message: string) {
     console.log(message);
-    this.chat.push(new ChatMessage(){ message: message, username: this.username });
+    this.chat.push(new ChatMessage(message, this.username));
     this.socket.emit('new message', message);
     //clear message
   }
 
   onMessage = (event) => {
-    this.chat.push(new ChatMessage(){ message: event.message, username: event.username });
+    this.chat.push(new ChatMessage(event.message, event.username));
   }
 }
 
 export class ChatMessage {
   username: string;
   message: string;
+
+  constructor(username: string, message: string) {
+    this.username = username;
+    this.message = message;
+  }
 }

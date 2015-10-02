@@ -1,5 +1,5 @@
 import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
-import {ChatService} from './chatService';
+import {ChatService, ChatMessage} from './chatService';
 
 @Component({
   selector: 'my-app',
@@ -17,8 +17,8 @@ class AppComponent {
   constructor(chatService: ChatService) {
     this.chat = chatService.chat;
     this.chatService = chatService;
-    this.setUsername("User_" + new Date().getTime());    
-  }  
+    this.setUsername("User_" + new Date().getTime());
+  }
 
   setUsername(username: string) {
     this.username = username;

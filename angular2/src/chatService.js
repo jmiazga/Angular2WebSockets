@@ -2,7 +2,7 @@ var ChatService = (function () {
     function ChatService() {
         var _this = this;
         this.onMessage = function (event) {
-            _this.chat.push(new ChatMessage(), { message: event.message, username: event.username });
+            _this.chat.push(new ChatMessage(event.message, event.username));
         };
         this.username = "";
         this.chat = [];
@@ -18,7 +18,7 @@ var ChatService = (function () {
     };
     ChatService.prototype.sendMessage = function (message) {
         console.log(message);
-        this.chat.push(new ChatMessage(), { message: message, username: this.username });
+        this.chat.push(new ChatMessage(message, this.username));
         this.socket.emit('new message', message);
         //clear message
     };
@@ -26,7 +26,9 @@ var ChatService = (function () {
 })();
 exports.ChatService = ChatService;
 var ChatMessage = (function () {
-    function ChatMessage() {
+    function ChatMessage(username, message) {
+        this.username = username;
+        this.message = message;
     }
     return ChatMessage;
 })();
